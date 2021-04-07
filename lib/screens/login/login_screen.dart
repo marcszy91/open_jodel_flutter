@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -75,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(width: 10,),
                       ElevatedButton.icon(
                           icon: Icon(Icons.settings, color: Colors.white),
-                          label: Text('Settings', style: TextStyle(color: Colors.white))
+                          label: Text(AppLocalizations.of(context).settings, style: TextStyle(color: Colors.white))
                       )
                     ],
                   )
