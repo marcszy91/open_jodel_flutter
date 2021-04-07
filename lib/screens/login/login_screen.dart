@@ -37,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
                       labelStyle: TextStyle(color: Colors.orange),
                       filled: true,
                       border: OutlineInputBorder(),
-                      labelText: 'User Name',
+                      labelText: AppLocalizations.of(context).username,
                     ),
                   ),
                 ),
@@ -49,39 +49,42 @@ class _LoginPageState extends State<LoginPage> {
                       labelStyle: TextStyle(color: Colors.orange),
                       filled: true,
                       border: OutlineInputBorder(),
-                      labelText: 'Password',
+                      labelText: AppLocalizations.of(context).password,
                     ),
                   ),
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
                   child: ElevatedButton.icon(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
-                    ),
-                    icon: Icon(Icons.lock_open, color: Colors.orange),
-                    label: Text('Login', style: TextStyle(color: Colors.orange),)
-                  ),
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.white),
+                      ),
+                      icon: Icon(Icons.lock_open, color: Colors.orange),
+                      label: Text(
+                        AppLocalizations.of(context).login,
+                        style: TextStyle(color: Colors.orange),
+                      )),
                 ),
                 Container(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      ElevatedButton.icon(
-                        icon: Icon(Icons.app_registration, color: Colors.white),
-                        label: Text('Registrieren', style: TextStyle(color: Colors.white))
-                      ),
-                      SizedBox(width: 10,),
-                      ElevatedButton.icon(
-                          icon: Icon(Icons.settings, color: Colors.white),
-                          label: Text(AppLocalizations.of(context).settings, style: TextStyle(color: Colors.white))
-                      )
-                    ],
-                  )
-                ),
-
+                    padding: EdgeInsets.all(10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        ElevatedButton.icon(
+                            icon: Icon(Icons.app_registration,
+                                color: Colors.white),
+                            label: Text(AppLocalizations.of(context).createNewAccount,
+                                style: TextStyle(color: Colors.white))),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        ElevatedButton.icon(
+                            icon: Icon(Icons.settings, color: Colors.white),
+                            label: Text(AppLocalizations.of(context).settings,
+                                style: TextStyle(color: Colors.white)))
+                      ],
+                    )),
               ],
             )));
   }

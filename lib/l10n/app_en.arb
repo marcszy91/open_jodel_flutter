@@ -1,6 +1,22 @@
 {
+  "createNewAccount": "Create New Account ",
+  "@createNewAccount": {
+    "description": "CreateNewAccount"
+  },
+  "login": "Log in",
+  "@login": {
+    "description": "Log in"
+  },
+  "password": "Password",
+  "@password": {
+    "description": "Password"
+  },
   "settings": "Settings",
   "@settings": {
     "description": "Settings"
+  },
+  "username": "Username",
+  "@username": {
+    "description": "Username"
   }
 }

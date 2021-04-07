@@ -1,3 +1,7 @@
 {
-  "settings": "Einstellungen"
+  "createNewAccount": "Neues Konto erstellen",
+  "login": "Anmelden",
+  "password": "Passwort",
+  "settings": "Einstellungen",
+  "username": "Benutzername"
 }
