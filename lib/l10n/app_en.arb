@@ -7,6 +7,10 @@
   "@login": {
     "description": "Log in"
   },
+  "loginFailed": "Login failed",
+  "@loginFailed": {
+    "description": "Login failed"
+  },
   "password": "Password",
   "@password": {
     "description": "Password"
@@ -18,5 +22,9 @@
   "username": "Username",
   "@username": {
     "description": "Username"
+  },
+  "wrongUsernameOrPassword": "Wrong username or password",
+  "@wrongUsernameOrPassword": {
+    "description": "Wrong username or password"
   }
 }

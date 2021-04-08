@@ -1,7 +1,9 @@
 {
   "createNewAccount": "Neues Konto erstellen",
   "login": "Anmelden",
+  "loginFailed": "Anmeldung fehlgeschlagen",
   "password": "Passwort",
   "settings": "Einstellungen",
-  "username": "Benutzername"
+  "username": "Benutzername",
+  "wrongUsernameOrPassword": "Der Benutzername oder das Passwort ist falsch"
 }

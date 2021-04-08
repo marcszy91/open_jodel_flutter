@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:open_jodel_flutter/model/login/login_request_model.dart';
 import 'package:open_jodel_flutter/model/login/login_response_model.dart';
 import 'package:open_jodel_flutter/repository/login/login_repository.dart';
@@ -22,10 +24,40 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  Future<void> _login(BuildContext context) async {
+  Future<void> _login() async {
+    final prefs = await SharedPreferences.getInstance();
+
     LoginRequestModel loginRequestModel =  new LoginRequestModel(email: usernameController.text, password: passwordController.text);
     LoginResponseModel loginResponseModel =  await login(loginRequestModel);
-    print(loginResponseModel);
+    if(loginResponseModel.status == "success") {
+      prefs.setString('Authorization', loginResponseModel.authorization);
+    }
+    else {
+      _showLoginFailedDialog();
+    }
+  }
+
+  Future<void> _showLoginFailedDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(AppLocalizations.of(context).loginFailed),
+          content: SingleChildScrollView(
+            child: Text(AppLocalizations.of(context).wrongUsernameOrPassword)
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -89,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(color: Colors.orange),
                     ),
                     onPressed: () {
-                      _login(context);
+                      _login();
                     },
                   ),
                 ),
