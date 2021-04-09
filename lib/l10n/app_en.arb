@@ -1,7 +1,15 @@
 {
+  "apiUrl": "API URL ",
+  "@apiUrl": {
+    "description": "API URL"
+  },
   "createNewAccount": "Create New Account ",
   "@createNewAccount": {
     "description": "CreateNewAccount"
+  },
+  "email": "E-Mail",
+  "@email": {
+    "description": "E-Mail"
   },
   "login": "Log in",
   "@login": {
@@ -15,13 +23,29 @@
   "@password": {
     "description": "Password"
   },
+  "save": "Save",
+  "@save": {
+    "description": "Save"
+  },
   "settings": "Settings",
   "@settings": {
     "description": "Settings"
   },
+  "signUp": "Sign Up",
+  "@signUp": {
+    "description": "Sign Up"
+  },
+  "signUpFailed": "Sign Up failed",
+  "@signUpFailed": {
+    "description": "Sign Up failed"
+  },
   "username": "Username",
   "@username": {
     "description": "Username"
+  },
+  "userAlreadyExist": "User already exist",
+  "@userAlreadyExist": {
+    "description": "User already exist"
   },
   "wrongUsernameOrPassword": "Wrong username or password",
   "@wrongUsernameOrPassword": {

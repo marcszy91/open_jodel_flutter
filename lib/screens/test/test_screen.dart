@@ -9,8 +9,10 @@ class _TestScreenState extends State<TestScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(          title: Text('Secure'),
-        backgroundColor: Colors.orange,),
+      appBar: AppBar(
+        title: Text('Secure'),
+        backgroundColor: Colors.orange,
+      ),
     );
   }
 }

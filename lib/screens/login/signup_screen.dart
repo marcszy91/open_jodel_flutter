@@ -1,52 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:open_jodel_flutter/screens/login/signup_screen.dart';
+import 'package:open_jodel_flutter/repository/signup/signup_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:open_jodel_flutter/model/login/login_request_model.dart';
 import 'package:open_jodel_flutter/model/login/login_response_model.dart';
-import 'package:open_jodel_flutter/repository/login/login_repository.dart';
-import 'package:open_jodel_flutter/screens/login/app_settings_screen.dart';
+import 'package:open_jodel_flutter/model/user/user_model.dart';
 
-class LoginPage extends StatefulWidget {
+class SignUpScreen extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SignUpScreenState createState() => _SignUpScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpScreenState extends State<SignUpScreen> {
+  final emailController = TextEditingController();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
+    emailController.dispose();
     usernameController.dispose();
     passwordController.dispose();
     super.dispose();
   }
 
-  Future<void> _login() async {
+  Future<void> _signUp() async {
     final prefs = await SharedPreferences.getInstance();
 
-    LoginRequestModel loginRequestModel = new LoginRequestModel(
-        email: usernameController.text, password: passwordController.text);
-    LoginResponseModel loginResponseModel = await login(loginRequestModel);
+    UserModel userModel = new UserModel( username: usernameController.text,
+        email: emailController.text, password: passwordController.text, publicId: "");
+    LoginResponseModel loginResponseModel = await signUp(userModel);
     if (loginResponseModel.status == "success") {
       prefs.setString('Authorization', loginResponseModel.authorization);
     } else {
-      _showLoginFailedDialog();
+      _showSignUpFailedDialog();
     }
   }
 
-  Future<void> _showLoginFailedDialog() async {
+  Future<void> _showSignUpFailedDialog() async {
     return showDialog<void>(
       context: context,
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(AppLocalizations.of(context).loginFailed),
+          title: Text(AppLocalizations.of(context).signUpFailed),
           content: SingleChildScrollView(
               child:
-                  Text(AppLocalizations.of(context).wrongUsernameOrPassword)),
+              Text(AppLocalizations.of(context).userAlreadyExist)),
           actions: <Widget>[
             TextButton(
               child: Text('OK'),
@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         backgroundColor: Colors.orange,
         appBar: AppBar(
-          title: Text('Open Jodel'),
+          title: Text(AppLocalizations.of(context).signUp),
           backgroundColor: Colors.orange,
         ),
         body: Padding(
@@ -73,15 +73,18 @@ class _LoginPageState extends State<LoginPage> {
             child: ListView(
               children: <Widget>[
                 Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.all(10),
-                    child: Text(
-                      'Login',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 30),
-                    )),
+                  padding: EdgeInsets.all(10),
+                  child: TextField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      labelStyle: TextStyle(color: Colors.orange),
+                      filled: true,
+                      border: OutlineInputBorder(),
+                      labelText: AppLocalizations.of(context).email,
+                    ),
+                  ),
+                ),
                 Container(
                   padding: EdgeInsets.all(10),
                   child: TextField(
@@ -100,8 +103,8 @@ class _LoginPageState extends State<LoginPage> {
                   child: TextField(
                     controller: passwordController,
                     obscureText: true,
-                    autocorrect: false,
                     enableSuggestions: false,
+                    autocorrect: false,
                     decoration: InputDecoration(
                       fillColor: Colors.white,
                       labelStyle: TextStyle(color: Colors.orange),
@@ -116,52 +119,18 @@ class _LoginPageState extends State<LoginPage> {
                   child: ElevatedButton.icon(
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.white),
+                      MaterialStateProperty.all<Color>(Colors.white),
                     ),
                     icon: Icon(Icons.lock_open, color: Colors.orange),
                     label: Text(
-                      AppLocalizations.of(context).login,
+                      AppLocalizations.of(context).createNewAccount,
                       style: TextStyle(color: Colors.orange),
                     ),
                     onPressed: () {
-                      _login();
+                      _signUp();
                     },
                   ),
                 ),
-                Container(
-                    padding: EdgeInsets.all(10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        ElevatedButton.icon(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SignUpScreen()),
-                              );
-                            },
-                            icon: Icon(Icons.app_registration,
-                                color: Colors.white),
-                            label: Text(
-                                AppLocalizations.of(context).createNewAccount,
-                                style: TextStyle(color: Colors.white))),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        ElevatedButton.icon(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AppSettingsScreen()),
-                              );
-                            },
-                            icon: Icon(Icons.settings, color: Colors.white),
-                            label: Text(AppLocalizations.of(context).settings,
-                                style: TextStyle(color: Colors.white)))
-                      ],
-                    )),
               ],
             )));
   }

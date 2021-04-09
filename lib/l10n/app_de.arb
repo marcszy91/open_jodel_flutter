@@ -1,9 +1,15 @@
 {
+  "apiUrl": "API URL",
   "createNewAccount": "Neues Konto erstellen",
+  "email": "E-Mail",
   "login": "Anmelden",
   "loginFailed": "Anmeldung fehlgeschlagen",
   "password": "Passwort",
+  "save": "Speichern",
   "settings": "Einstellungen",
+  "signUp": "Registrieren",
+  "signUpFailed": "Registrierung fehlgeschlagen",
   "username": "Benutzername",
+  "userAlreadyExist": "Der Benutzer existiert bereits",
   "wrongUsernameOrPassword": "Der Benutzername oder das Passwort ist falsch"
 }
